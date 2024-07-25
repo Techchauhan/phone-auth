@@ -37,9 +37,23 @@ const OtpLogin = () => {
     return () => clearTimeout(timer);
   }, [resendCountdown]);
 
+  useEffect(() => {
+    const recaptchaVerifier = new RecaptchaVerifier(
+      auth,
+      "recaptcha-container",
+      { size: "invisible" },
+    )
+
+    setRecaptchaVerifier(recaptchaVerifier);
+
+    return () => {
+      recaptchaVerifier.clear();
+    };
+  }, [auth]);
+
   return (
     <div>
-      OTP Login Component
+      <div id="recaptcha-container" />
     </div>
   )
 }
