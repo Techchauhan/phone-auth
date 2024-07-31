@@ -14,6 +14,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
+import { verify } from "crypto";
 
 const OtpLogin = () => {
 
@@ -50,6 +51,34 @@ const OtpLogin = () => {
       recaptchaVerifier.clear();
     };
   }, [auth]);
+
+  useEffect(() => {
+    const hasEnteredAllDigits = otp.length === 6;
+    if (hasEnteredAllDigits) {
+      verifyOtp();
+    }
+
+
+  }, [otp]);
+
+  const verifyOtp = async () => {
+    startTransition(async () => {
+      setError("");
+
+      if (!confirmationResult) {
+        setError("Please request the OTP first.");
+        return;
+      }
+
+      try {
+        await confirmationResult?.confirm(otp);
+        router.replace("/");
+      } catch (error) {
+        console.log(error);
+        setError("Failed to verify OTP. Please check the OTP")
+      }
+    })
+  }
 
   const requestOtp = async (e?: FormEvent<HTMLFormElement>) => {
     console.log("Button Clicked")

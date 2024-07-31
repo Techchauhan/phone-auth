@@ -1,13 +1,32 @@
-'use client';
+"use client"
 
-import OtpLogin from "@/components/OtpLogin";
+import { useAuth } from "@/components/AuthProvider";
+import { Button } from "@/components/ui/button";
+import { auth } from "@/firebase";
+import { signOut } from "firebase/auth";
+import Link from "next/link";
 
 export default function Home() {
+
+  const { user } = useAuth();
+
   return (
     <main className="text-center">
-      <div>Phone OTP Authentication</div>
+      <h1 className="font-bold text-center mb-5">How to add one-time password phone authentication</h1>
 
-      <OtpLogin />
+      {user ? (
+        <h2>Welcome to the App as a logged in as User {user.uid} </h2>
+      ) : (
+        <h2>You are not logged in</h2>
+      )}
+
+      {user ? (
+        <Button onClick={() => signOut(auth)} className="mt-10">Sign out</Button>
+      ) : (
+        <Link href="/login">
+          <Button className="mt-10">Sign in</Button>
+        </Link>
+      )}
     </main>
   );
 }
