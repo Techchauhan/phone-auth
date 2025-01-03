@@ -8,18 +8,17 @@ import { getAuth } from "firebase/auth";
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyAa5ur-1oaAPpZfRBGg2fSMSfaa-FnzCYA",
-  authDomain: "sms-authentication-cd360.firebaseapp.com",
-  projectId: "sms-authentication-cd360",
-  storageBucket: "sms-authentication-cd360.appspot.com",
-  messagingSenderId: "635248074835",
-  appId: "1:635248074835:web:a3a73f833824f3b8aba6a6",
-  measurementId: "G-PXM7LD6047"
+  apiKey: "AIzaSyC4X191jlI5WONorU4OkfFa844XzQYkFnk",
+  authDomain: "ecommerce-with-pulsezest.firebaseapp.com",
+  projectId: "ecommerce-with-pulsezest",
+  storageBucket: "ecommerce-with-pulsezest.firebasestorage.app",
+  messagingSenderId: "163595114954",
+  appId: "1:163595114954:web:4bbe97ef15ea8036949733",
+  measurementId: "G-HRHZMT8TC8"
 };
 
 // Initialize Firebase
-const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
+const app =  initializeApp(firebaseConfig);
 const auth = getAuth(app);
-auth.useDeviceLanguage();
 
 export {auth};
